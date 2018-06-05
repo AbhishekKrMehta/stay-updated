@@ -1,0 +1,11 @@
+body{
+    
+    background-image:  url('./assets/trianglify.svg');
+    background-repeat:no-repeat;
+    background-size:cover;
+    
+}
+
+html,body{
+    scroll-behavior: smooth;
+}

@@ -1,0 +1,122 @@
+<!-- navbar -->
+<nav class="navbar fixed-top navbar-expand-lg  navbar-dark bg-dark justify-content-between" id="mainNav">
+  <a class="navbar-brand" href="https://abhishekkrmehta.github.io/stay-updated/" target="_blank">StayUpdated</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  
+  <div class="collapse navbar-collapse" id="navbarToggler">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item"><a class="nav-link" href="#" (click)="newsByKword('new')">Home</a></li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Categories
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#" (click)="newsByCategory('business')">Business</a>
+          <div class="dropdown-divider"></div>
+          
+          <a class="dropdown-item" href="#" (click)="newsByCategory('entertainment')">Entertainment</a>
+          <div class="dropdown-divider"></div>
+          
+          <a class="dropdown-item" href="#" (click)="newsByCategory('general')">General</a>
+          <div class="dropdown-divider"></div>
+          
+          <a class="dropdown-item" href="#" (click)="newsByCategory('health')">Health</a>
+          <div class="dropdown-divider"></div>
+          
+          <a class="dropdown-item" href="#" (click)="newsByCategory('science')">Science</a>
+          <div class="dropdown-divider"></div>
+          
+          <a class="dropdown-item" href="#" (click)="newsByCategory('sports')">Sports</a>
+          <div class="dropdown-divider"></div>
+          
+          <a class="dropdown-item" href="#" (click)="newsByCategory('technology')">Technology</a>
+        </div>
+      </li>
+    </ul>
+    
+    
+    <div class="form-inline my-2 my-lg-0" style="display: inline-block">
+        <input class="form-control mr-sm-2" #userInput type="search" placeholder="Enter keyword(s) here" 
+        (keypress)="search($event,userInput.value)" style="width:250px" id="typedValue">
+        <button class="btn btn-outline-primary my-2 my-sm-0" href="#" (click)="newsByKword(userInput.value)">Search</button>
+    </div>
+  </div>
+</nav>
+
+<div id="space"></div>
+
+<div class="d-none d-lg-block alert alert-info" role="alert" id="trend">
+  Trending searches:
+  <button type="button" class="btn btn-info" (click)="newsByKword('china')">China</button>
+  <button type="button" class="btn btn-info" (click)="newsByKword('donald trump')">Donald Trump</button>
+  <button type="button" class="btn btn-info" (click)="newsByKword('cryptocurrency')">Cryptocurrency</button>
+  <button type="button" class="btn btn-info" (click)="newsByKword('football')">Football</button>
+  <button type="button" class="btn btn-info" (click)="newsByKword('amazon')">Amazon</button>
+  
+</div>
+<div class="alert alert-dark" role="alert" *ngIf="category != '0'" style="position:sticky; top: 56px;z-index: 1;">
+  <p class="h5 lead" >You have selected category:  <strong>{{category | uppercase}}</strong></p>
+</div>
+
+<div class="alert alert-dark" role="alert" *ngIf="keyWord != 'false' && keyWord != 'new'"
+ style="position:sticky; top: 56px;z-index: 1;">
+  <p class="h5 lead" >Search results for &emsp;<strong>{{keyWord | uppercase}}</strong></p>  
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-11 col-12 col-sm-12">
+      
+      <!-- Cards -->
+      <div class="card text-center" *ngFor="let news of News"> 
+        <img class="card-img-top" [src]="news.urlToImage" id="cardImage"
+        alt="Sorry, image not available at the moment">
+        <div class="card-body">
+          <a [href]="news.url | sanitize" target="_blank" style="text-decoration: none">
+              <h5 class="card-title">{{news.title}}</h5>
+              <h5 class="card-title" *ngIf="news.title?.length < 24" style="margin: 0px;">&nbsp;</h5>
+              <h5 class="card-title" *ngIf="news.title?.length < 49" style="margin: 0px;">&nbsp;</h5>
+          </a>
+          <h6 class="card-subtitle mb-2 text-muted">{{news.source.name}}</h6>
+          <hr>
+          <p class="card-text">{{news.description}}</p>
+          <p *ngIf="news.description == null || news.description?.length == 0" class="text-muted">No description available</p>
+          <p *ngIf="news.description?.length < 46" style="margin: 0px;">&nbsp;</p>
+          <p *ngIf="news.description?.length < 95" style="margin: 0px;">&nbsp;</p>
+          <p *ngIf="news.description?.length < 135" style="margin: 0px;">&nbsp;</p>
+          <p *ngIf="news.description?.length < 175" style="margin: 0px;">&nbsp;</p>
+          <!-- <p *ngIf="news.description?.length < 180">&nbsp;</p> -->
+          
+          <p class="card-text"><small class="text-muted">{{news.publishedAt | date:'medium'}}</small></p>
+          <a [href]="news.url | sanitize" target="_blank" class="btn btn-outline-primary">Read complete story</a>
+          
+        </div>
+      </div>
+      <!-- invalid keyword -->
+      
+      <div class="invalidSearch " *ngIf="this.News?.length==0 && keyWord != 'new'">
+        <p class="display-4"> Your search <strong> {{keyWord}} </strong> did not match any documents.</p>
+        <br>
+        <p style="padding-left: 15px"> Try the following suggestions:</p>
+        
+        <ul class="lead">
+          <li>Make sure that all words are spelled correctly.</li>
+          <li>Try different keywords.</li>
+          <li>Try more general keywords.</li>
+        </ul>        
+      </div>
+    </div>
+    
+    <div class="col-lg-1 d-none d-xl-block"  id="weatherWidget">
+      <a href="#" data-toggle="tooltip" title="Scroll to the top">
+        <i class="fas fa-arrow-circle-up fa-2x" style="color: #ffffff;"></i></a>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  

@@ -1,0 +1,22 @@
+nav{
+    margin-top: 15px;
+    font-size: 0.9rem;
+}
+
+/* Media Queries */
+
+/* Custom, iPhone Retina */ 
+
+@media only screen and (min-width : 320px) {
+
+    nav{
+        font-size: 13px;
+    }
+}
+
+/* Extra Small Devices, Phones */ 
+@media only screen and (min-width : 576px) {
+nav{
+    font-size: 0.9rem;
+}
+}

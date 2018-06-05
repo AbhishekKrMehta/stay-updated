@@ -1,0 +1,125 @@
+#mainNav{
+    z-index: 2;
+}
+
+#mainNav li{
+    margin: 0 10px;
+}
+
+#space{
+    content: '';
+    display: block;
+    clear: both;
+    margin-bottom: 57px;
+}
+
+#trend{
+    margin: 0;
+}
+#trend button{
+    margin:0px 20px;
+}
+
+.card{
+    width: 21rem; 
+    display:inline-block;
+    margin:7px;
+}
+
+.card:hover{
+    background-color: #e9ecef;
+}
+
+
+/* #cardImage:hover{
+    filter:drop-shadow(0 0 0) opacity(90%);
+} */
+
+#weatherWidget{
+    padding: 0px;
+    margin:  0px 0px 0px -17px ;
+    position: relative;
+}
+
+#weatherWidget a{
+    position: absolute;
+    bottom: 13px;
+    right: 41%;
+}
+
+/* Media Queries */
+
+/* Custom, iPhone Retina */ 
+@media only screen and (min-width : 320px) {
+    .card{
+        width: 100%; 
+        display:block;
+        margin:15px 0;
+    }
+
+    
+}
+
+/* Extra Small Devices, Phones */ 
+@media only screen and (min-width : 576px) {
+    
+    .card{
+        width: 75%; 
+        display:block;
+        margin:25px auto;
+    }
+    
+    #cardImage{
+        max-height: 27rem;
+        min-height: 15rem;
+    }
+    
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+    .card{
+        width: 47%; 
+        display:inline-block;
+        margin: 10px;
+    }
+    
+    #cardImage{
+        max-height: 15rem;
+        min-height: 13rem;
+    }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+    
+    .col-lg-11{
+        margin: 0 auto;
+    }
+    .card{
+        width: 32%; 
+        display:inline-block;
+        margin: 0.666%;
+    }
+    
+    #cardImage{
+        max-height: 13rem;
+        min-height: 11rem;
+    }
+    
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+    
+    .card{
+        width: 24%; 
+        display:inline-block;
+        margin: 0.5%;
+    }
+    #cardImage{
+        max-height: 195px;
+        min-height: 180px;
+    }
+    
+}
